@@ -106,8 +106,8 @@ jacocoTestReport {
 
 sonar {
     properties {
-        property 'sonar.projectKey', 'cdanmontoya_base'
-        property 'sonar.organization', 'cdanmontoya-1'
+        property 'sonar.projectKey', 'cdanmontoya_backend-base'
+        property 'sonar.organization', 'cdanmontoya'
         property 'sonar.host.url', 'https://sonarcloud.io'
     }
 }
