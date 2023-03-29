@@ -1,7 +1,5 @@
 package com.cdanmontoya.base;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.domain.JavaPackage;

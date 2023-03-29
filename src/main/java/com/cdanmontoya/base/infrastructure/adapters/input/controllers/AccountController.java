@@ -12,7 +12,6 @@ import com.cdanmontoya.base.infrastructure.acl.dto.InsertAccountRequestDto;
 import com.cdanmontoya.base.infrastructure.acl.translators.registeraccount.RegisterAccountRequestDtoTranslator;
 import com.cdanmontoya.ddd.Message;
 import jakarta.validation.Valid;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import org.slf4j.Logger;
@@ -56,7 +55,7 @@ public class AccountController {
   }
 
   @GetMapping("/{accountId}")
-  private Mono<Optional<Account>> get(@PathVariable UUID accountId) {
+  public Mono<Optional<Account>> get(@PathVariable UUID accountId) {
     logger.atInfo().setMessage("GET request for user {}").addArgument(accountId).log();
 
     return queryAccountsService.findById(new AccountId(accountId));

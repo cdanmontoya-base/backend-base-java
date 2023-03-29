@@ -2,8 +2,8 @@ package com.cdanmontoya.base.application.services;
 
 import com.cdanmontoya.base.application.commands.RegisterAccount;
 import com.cdanmontoya.base.application.ports.output.repositories.AccountRepository;
-import com.cdanmontoya.base.domain.events.AccountNotInserted;
 import com.cdanmontoya.base.domain.events.AccountInserted;
+import com.cdanmontoya.base.domain.events.AccountNotInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.domain.model.ContactInformation;

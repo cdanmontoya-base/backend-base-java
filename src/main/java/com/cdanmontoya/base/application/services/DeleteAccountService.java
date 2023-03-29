@@ -4,7 +4,6 @@ import com.cdanmontoya.base.application.commands.DeleteAccount;
 import com.cdanmontoya.base.application.ports.output.repositories.AccountRepository;
 import com.cdanmontoya.base.domain.events.AccountDeleted;
 import com.cdanmontoya.base.domain.events.AccountNotDeleted;
-import com.cdanmontoya.base.domain.events.AccountNotInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.ddd.Message;
 import com.cdanmontoya.ddd.MessagePublisher;
@@ -29,6 +28,7 @@ public class DeleteAccountService {
 
   // TODO: la operación de obtener los eventos y publicar es repetitiva. ¿Se puede definir en una función?
   public Mono<Message> delete(DeleteAccount deleteAccount) {
+    logger.atInfo().log("Deleting account {}", deleteAccount);
     return this.accountRepository
         .delete(deleteAccount.id())
         .map(deletedAccount -> getSuccessfulEvent(deletedAccount.orElseThrow()))
@@ -43,6 +43,5 @@ public class DeleteAccountService {
   private Mono<Message> getErrorEvent(String message) {
     return Mono.just(new AccountNotDeleted(message));
   }
-
 
 }
