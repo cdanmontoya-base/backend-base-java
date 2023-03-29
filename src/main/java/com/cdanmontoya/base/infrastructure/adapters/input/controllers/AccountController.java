@@ -9,10 +9,9 @@ import com.cdanmontoya.base.domain.events.AccountInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.infrastructure.acl.dto.InsertAccountRequestDto;
-import com.cdanmontoya.base.infrastructure.acl.translators.registeraccount.RegisterAccountRequestDtoTranslator;
+import com.cdanmontoya.base.infrastructure.acl.translators.registeraccount.InsertAccountRequestDtoTranslator;
 import com.cdanmontoya.ddd.Message;
 import jakarta.validation.Valid;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import org.slf4j.Logger;
@@ -56,7 +55,7 @@ public class AccountController {
   }
 
   @GetMapping("/{accountId}")
-  private Mono<Optional<Account>> get(@PathVariable UUID accountId) {
+  public Mono<Optional<Account>> get(@PathVariable UUID accountId) {
     logger.atInfo().setMessage("GET request for user {}").addArgument(accountId).log();
 
     return queryAccountsService.findById(new AccountId(accountId));
@@ -66,7 +65,7 @@ public class AccountController {
   public Mono<ResponseEntity<Message>> insert(@Valid @RequestBody InsertAccountRequestDto dto) {
     logger.atInfo().log("Executing insert request with payload {}", dto);
 
-    return insertAccountService.register(RegisterAccountRequestDtoTranslator.of(dto))
+    return insertAccountService.insert(InsertAccountRequestDtoTranslator.of(dto))
         .map(AccountController::getResponseEntity);
   }
 

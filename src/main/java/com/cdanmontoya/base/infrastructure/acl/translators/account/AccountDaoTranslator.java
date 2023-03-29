@@ -7,10 +7,6 @@ import com.cdanmontoya.base.infrastructure.adapters.output.repositories.account.
 
 public class AccountDaoTranslator {
 
-  private AccountDaoTranslator() {
-    throw new IllegalStateException("Utility class");
-  }
-
   public static Account of(AccountRecord accountRecord) {
     return new Account(
         new AccountId(accountRecord.id()),

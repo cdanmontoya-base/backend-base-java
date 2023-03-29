@@ -1,4 +1,4 @@
-package com.cdanmontoya.base.factories;
+package com.cdanmontoya.base.factories.domain;
 
 import com.cdanmontoya.base.domain.model.AccountId;
 import java.util.UUID;

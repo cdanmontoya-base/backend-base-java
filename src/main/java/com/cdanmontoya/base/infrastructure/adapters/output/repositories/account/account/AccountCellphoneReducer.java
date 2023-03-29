@@ -1,6 +1,5 @@
 package com.cdanmontoya.base.infrastructure.adapters.output.repositories.account.account;
 
-import com.cdanmontoya.base.infrastructure.adapters.output.repositories.account.cellphone.CellphoneMapper;
 import java.util.Map;
 import java.util.Objects;
 import org.jdbi.v3.core.result.LinkedHashMapRowReducer;

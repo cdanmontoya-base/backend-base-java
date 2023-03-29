@@ -1,9 +1,9 @@
 package com.cdanmontoya.base.application.services;
 
-import com.cdanmontoya.base.application.commands.RegisterAccount;
+import com.cdanmontoya.base.application.commands.InsertAccount;
 import com.cdanmontoya.base.application.ports.output.repositories.AccountRepository;
-import com.cdanmontoya.base.domain.events.AccountNotInserted;
 import com.cdanmontoya.base.domain.events.AccountInserted;
+import com.cdanmontoya.base.domain.events.AccountNotInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.domain.model.ContactInformation;
@@ -30,14 +30,14 @@ public class InsertAccountService {
     this.messagePublisher = messagePublisher;
   }
 
-  public Mono<Message> register(RegisterAccount registerAccount) {
-    logger.atInfo().log("Registering account {}", registerAccount);
+  public Mono<Message> insert(InsertAccount insertAccount) {
+    logger.atInfo().log("Registering account {}", insertAccount);
 
     Account account = new Account(
         new AccountId(UUID.randomUUID()),
         new ContactInformation(
-            registerAccount.email(),
-            registerAccount.cellphones()
+            insertAccount.email(),
+            insertAccount.cellphones()
         )
     );
 
