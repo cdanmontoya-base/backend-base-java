@@ -23,7 +23,7 @@ import org.mockito.Mockito;
 import reactor.core.publisher.Mono;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class DeleteAccountServiceTest {
+class DeleteAccountServiceTest {
   private AccountRepository accountRepository;
   private MessagePublisher messagePublisher;
   private DeleteAccountService deleteAccountService;

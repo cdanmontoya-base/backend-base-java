@@ -1,7 +1,6 @@
 package com.cdanmontoya.base.domain.events;
 
 import com.cdanmontoya.base.domain.events.AccountDeleted.Data;
-import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.ddd.AbstractEvent;
 
