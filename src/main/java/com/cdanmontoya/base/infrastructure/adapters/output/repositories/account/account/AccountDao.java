@@ -58,7 +58,7 @@ public interface AccountDao {
   @SqlUpdate("INSERT INTO accounts (id, email) VALUES (:account.id, :account.email)")
   void insertAccount(@BindMethods("account") AccountRecord accountRecord);
 
-  @SqlQuery("DELETE FROM accounts a WHERE id = :id.id RETURNING *")
-  AccountRecord delete(@BindMethods("id") AccountId accountId);
+  @SqlUpdate("DELETE FROM accounts a WHERE id = :id.id")
+  void delete(@BindMethods("id") AccountId accountId);
 
 }

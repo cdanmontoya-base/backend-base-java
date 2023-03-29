@@ -49,9 +49,14 @@ public class AccountRepositoryJdbi implements AccountRepository {
   }
 
   @Override
-  public Mono<Optional<Account>> delete(AccountId id) {
-    return Mono.just(Optional.ofNullable(database.onDemand(AccountDao.class).delete(id)))
-        .map(accountRecord -> accountRecord.map(AccountDaoTranslator::of));
+  public Mono<Optional<AccountId>> delete(AccountId id) {
+    try {
+      database.onDemand(AccountDao.class).delete(id);
+      return Mono.just(Optional.of(id));
+    }
+    catch (Exception e) {
+      return Mono.error(e);
+    }
   }
 
 }

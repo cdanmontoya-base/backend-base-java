@@ -9,7 +9,7 @@ import com.cdanmontoya.base.domain.events.AccountInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.infrastructure.acl.dto.InsertAccountRequestDto;
-import com.cdanmontoya.base.infrastructure.acl.translators.registeraccount.RegisterAccountRequestDtoTranslator;
+import com.cdanmontoya.base.infrastructure.acl.translators.registeraccount.InsertAccountRequestDtoTranslator;
 import com.cdanmontoya.ddd.Message;
 import jakarta.validation.Valid;
 import java.util.Optional;
@@ -65,7 +65,7 @@ public class AccountController {
   public Mono<ResponseEntity<Message>> insert(@Valid @RequestBody InsertAccountRequestDto dto) {
     logger.atInfo().log("Executing insert request with payload {}", dto);
 
-    return insertAccountService.register(RegisterAccountRequestDtoTranslator.of(dto))
+    return insertAccountService.insert(InsertAccountRequestDtoTranslator.of(dto))
         .map(AccountController::getResponseEntity);
   }
 

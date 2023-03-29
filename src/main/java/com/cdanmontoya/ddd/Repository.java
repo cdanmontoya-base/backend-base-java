@@ -15,5 +15,5 @@ public interface Repository<T extends AggregateRoot<K>, K extends Identifier> {
 
   Mono<Optional<T>> update(K id, T data);
 
-  Mono<Optional<T>> delete(K id);
+  Mono<Optional<K>> delete(K id);
 }

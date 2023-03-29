@@ -16,3 +16,4 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     enabled: true
+    clean-disabled: false

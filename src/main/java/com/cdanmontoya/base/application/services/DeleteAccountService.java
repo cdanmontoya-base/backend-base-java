@@ -4,7 +4,7 @@ import com.cdanmontoya.base.application.commands.DeleteAccount;
 import com.cdanmontoya.base.application.ports.output.repositories.AccountRepository;
 import com.cdanmontoya.base.domain.events.AccountDeleted;
 import com.cdanmontoya.base.domain.events.AccountNotDeleted;
-import com.cdanmontoya.base.domain.model.Account;
+import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.ddd.Message;
 import com.cdanmontoya.ddd.MessagePublisher;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class DeleteAccountService {
         .flatMap(messagePublisher::publish);
   }
 
-  private Message getSuccessfulEvent(Account account) {
+  private Message getSuccessfulEvent(AccountId account) {
     return new AccountDeleted(account);
   }
 

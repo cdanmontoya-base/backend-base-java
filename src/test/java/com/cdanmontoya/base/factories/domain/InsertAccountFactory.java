@@ -1,16 +1,16 @@
-package com.cdanmontoya.base.factories;
+package com.cdanmontoya.base.factories.domain;
 
-import com.cdanmontoya.base.domain.model.ContactInformation;
+import com.cdanmontoya.base.application.commands.InsertAccount;
 import java.util.List;
 import net.datafaker.Faker;
 
-public class ContactInformationFactory {
-
+public class InsertAccountFactory {
   private String email;
   private List<String> cellphones;
 
-  public ContactInformationFactory() {
+  public InsertAccountFactory() {
     Faker faker = new Faker();
+
     email = faker.internet().emailAddress();
     cellphones = List.of(
         faker.phoneNumber().cellPhone(),
@@ -19,20 +19,18 @@ public class ContactInformationFactory {
     );
   }
 
-  public ContactInformationFactory setEmail(String email) {
+  public InsertAccountFactory setEmail(String email) {
     this.email = email;
     return this;
   }
 
-  public ContactInformationFactory setCellphones(List<String> cellphones) {
+  public InsertAccountFactory setCellphones(List<String> cellphones) {
     this.cellphones = cellphones;
     return this;
   }
 
-  public ContactInformation get() {
-    return new ContactInformation(
-        email,
-        cellphones
-    );
+  public InsertAccount get() {
+    return new InsertAccount(email, cellphones);
   }
+
 }
