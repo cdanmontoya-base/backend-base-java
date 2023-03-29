@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /base
+
+spring:
+  application:
+    name: base
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOSTNAME}:5432/base
+    jdbc-url: jdbc:postgresql://${DB_HOSTNAME}:5432/base
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    enabled: true
