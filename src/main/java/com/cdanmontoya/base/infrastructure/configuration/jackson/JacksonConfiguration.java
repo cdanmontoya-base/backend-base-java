@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JacksonConfiguration {
 
-  private JacksonConfiguration() {
-  }
-
   @Bean
   public static ObjectMapper jacksonMapper() {
     return new ObjectMapper()
