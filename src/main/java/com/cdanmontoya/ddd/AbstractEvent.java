@@ -16,7 +16,7 @@ public class AbstractEvent<T> implements Event {
     this.id = UUID.randomUUID();
     this.occurredOn = ZonedDateTime.now();
     this.source = source;
-    this.name = this.getClass().getSimpleName();
+    this.name = getClass().getSimpleName();
     this.version = version;
   }
 

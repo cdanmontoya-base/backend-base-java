@@ -9,7 +9,7 @@ import com.cdanmontoya.base.domain.events.AccountInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.infrastructure.acl.dto.InsertAccountRequestDto;
-import com.cdanmontoya.base.infrastructure.acl.translators.registeraccount.InsertAccountRequestDtoTranslator;
+import com.cdanmontoya.base.infrastructure.acl.translators.insertaccount.InsertAccountRequestDtoTranslator;
 import com.cdanmontoya.ddd.Message;
 import jakarta.validation.Valid;
 import java.util.Optional;
@@ -33,7 +33,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/accounts")
 public class AccountController {
 
-  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+  private final Logger logger = LoggerFactory.getLogger(getClass());
   private final QueryAccountsService queryAccountsService;
   private final InsertAccountService insertAccountService;
   private final DeleteAccountService deleteAccountService;

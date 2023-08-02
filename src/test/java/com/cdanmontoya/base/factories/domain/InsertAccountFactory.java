@@ -1,7 +1,7 @@
 package com.cdanmontoya.base.factories.domain;
 
 import com.cdanmontoya.base.application.commands.InsertAccount;
-import java.util.List;
+import io.vavr.collection.List;
 import net.datafaker.Faker;
 
 public class InsertAccountFactory {

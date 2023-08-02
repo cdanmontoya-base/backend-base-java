@@ -5,6 +5,7 @@
 ![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 ![Code style](https://img.shields.io/badge/Code%20style-Google-lightgray?style=for-the-badge&logo=Google)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cdanmontoya_backend-base&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cdanmontoya_backend-base)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cdanmontoya_backend-base&metric=coverage)](https://sonarcloud.io/summary/new_code?id=cdanmontoya_backend-base)

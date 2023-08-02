@@ -1,7 +1,7 @@
 package com.cdanmontoya.base.domain.model;
 
 import com.cdanmontoya.ddd.ValueObject;
-import java.util.List;
+import io.vavr.collection.List;
 
 public record ContactInformation(
     String email,

@@ -3,6 +3,7 @@ package com.cdanmontoya.base.infrastructure.adapters.output.repositories.account
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.infrastructure.adapters.output.repositories.account.cellphone.CellphoneDao;
 import com.cdanmontoya.base.infrastructure.adapters.output.repositories.account.cellphone.CellphoneMapper;
+import io.vavr.control.Try;
 import java.util.Collection;
 import org.jdbi.v3.sqlobject.CreateSqlObject;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
@@ -19,7 +20,6 @@ public interface AccountDao {
   @CreateSqlObject
   CellphoneDao cellphoneDao();
 
-
   @SqlQuery("""
       SELECT a.id a_id, a.email a_email, c.number c_number
       FROM accounts a
@@ -32,17 +32,18 @@ public interface AccountDao {
 
   @Transaction
   default Mono<AccountRecord> insert(AccountRecord accountRecord) {
-    try {
-      insertAccount(accountRecord);
-
-      accountRecord
-          .cellphones()
-          .forEach(number -> cellphoneDao().insert(accountRecord.id(), number));
-
-      return Mono.just(accountRecord);
-    } catch (Exception e) {
-      return Mono.error(e);
-    }
+    return Try.of(() -> {
+          insertAccount(accountRecord);
+          accountRecord
+              .cellphones()
+              .forEach(number -> cellphoneDao().insert(accountRecord.id(), number));
+          return accountRecord;
+        })
+        .toEither()
+        .fold(
+            Mono::error,
+            Mono::just
+        );
   }
 
   @SqlQuery("""

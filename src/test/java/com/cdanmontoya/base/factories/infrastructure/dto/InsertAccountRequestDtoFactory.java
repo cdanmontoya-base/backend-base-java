@@ -1,7 +1,7 @@
 package com.cdanmontoya.base.factories.infrastructure.dto;
 
 import com.cdanmontoya.base.infrastructure.acl.dto.InsertAccountRequestDto;
-import java.util.List;
+import io.vavr.collection.List;
 import net.datafaker.Faker;
 
 public class InsertAccountRequestDtoFactory {

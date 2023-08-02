@@ -5,6 +5,7 @@ import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.infrastructure.acl.translators.account.AccountDaoTranslator;
 import com.cdanmontoya.base.infrastructure.adapters.output.repositories.account.account.AccountDao;
+import io.vavr.control.Try;
 import java.util.Optional;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jdbi.v3.core.Jdbi;
@@ -50,13 +51,15 @@ public class AccountRepositoryJdbi implements AccountRepository {
 
   @Override
   public Mono<Optional<AccountId>> delete(AccountId id) {
-    try {
-      database.onDemand(AccountDao.class).delete(id);
-      return Mono.just(Optional.of(id));
-    }
-    catch (Exception e) {
-      return Mono.error(e);
-    }
+    return Try.of(() -> {
+          database.onDemand(AccountDao.class).delete(id);
+          return Optional.of(id);
+        })
+        .toEither()
+        .fold(
+            Mono::error,
+            Mono::just
+        );
   }
 
 }

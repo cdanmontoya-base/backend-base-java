@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.infrastructure.configuration.database.ClearDatabase;
-import java.util.List;
+import io.vavr.collection.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.wavefront.WavefrontProperties.Application;
@@ -24,7 +24,7 @@ public class QueryAccountServiceIntegrationTest {
 
   @Test
   void givenNoAccounts_whenFindingAll_shouldBeEmpty() {
-    List<Account> list = queryAccountsService.findAll().toStream().toList();
+    List<Account> list = List.ofAll(queryAccountsService.findAll().toIterable());
 
     assertThat(list).isEmpty();
 

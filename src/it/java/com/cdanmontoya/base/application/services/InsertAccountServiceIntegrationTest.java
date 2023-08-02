@@ -8,7 +8,7 @@ import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.factories.domain.InsertAccountFactory;
 import com.cdanmontoya.base.infrastructure.configuration.database.ClearDatabase;
 import com.cdanmontoya.ddd.Message;
-import java.util.List;
+import io.vavr.collection.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.wavefront.WavefrontProperties.Application;
@@ -35,7 +35,8 @@ public class InsertAccountServiceIntegrationTest {
 
     Message block = insertAccountService.insert(insertAccount).block();
 
-    List<Account> accounts = queryAccountsService.findAll().toStream().toList();
+
+    List<Account> accounts = List.ofAll(queryAccountsService.findAll().toIterable());
 
     assertThat(block).isInstanceOf(AccountInserted.class);
     assertThat(accounts).hasSize(1);

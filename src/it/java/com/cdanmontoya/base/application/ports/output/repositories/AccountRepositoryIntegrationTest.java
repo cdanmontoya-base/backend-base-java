@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.factories.domain.AccountFactory;
 import com.cdanmontoya.base.infrastructure.configuration.database.ClearDatabase;
-import java.util.List;
+import io.vavr.collection.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.wavefront.WavefrontProperties.Application;
@@ -39,7 +39,7 @@ public class AccountRepositoryIntegrationTest {
   void givenNoAccount_whenFindingAll_shouldReturnEmptyList() {
     Account account = new AccountFactory().get();
 
-    List<Account> list = accountRepository.findAll().toStream().toList();
+    List<Account> list = List.ofAll(accountRepository.findAll().toIterable());
 
     assertThat(list).isEmpty();
   }
@@ -54,7 +54,7 @@ public class AccountRepositoryIntegrationTest {
     accountRepository.insert(account2).block().get();
     accountRepository.insert(account3).block().get();
 
-    List<Account> list = accountRepository.findAll().toStream().toList();
+    List<Account> list = List.ofAll(accountRepository.findAll().toIterable());
 
     assertThat(list)
         .hasSize(3);
@@ -72,7 +72,7 @@ public class AccountRepositoryIntegrationTest {
 
     accountRepository.delete(account2.getId()).block();
 
-    List<Account> list = accountRepository.findAll().toStream().toList();
+    List<Account> list = List.ofAll(accountRepository.findAll().toIterable());
 
     assertThat(list)
         .hasSize(2);

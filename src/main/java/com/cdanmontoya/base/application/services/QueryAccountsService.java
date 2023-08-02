@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class QueryAccountsService {
-  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+  private final Logger logger = LoggerFactory.getLogger(getClass());
   private final AccountRepository accountRepository;
 
   @Autowired

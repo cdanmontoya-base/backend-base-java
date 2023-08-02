@@ -4,5 +4,5 @@ import reactor.core.publisher.Mono;
 
 public interface MessagePublisher {
 
-  Mono<Message> publish(Message event);
+  Mono<Message> publish(Message message);
 }

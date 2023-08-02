@@ -13,7 +13,7 @@ public class AccountInserted extends AbstractEvent<Data> {
     this.data = new Data(account);
   }
 
-  protected record Data(Account account) {
+  public record Data(Account account) {
 
   }
 

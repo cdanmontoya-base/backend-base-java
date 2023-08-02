@@ -2,6 +2,7 @@ package com.cdanmontoya.base.infrastructure.configuration.messagepublisher;
 
 import com.cdanmontoya.ddd.Message;
 import com.cdanmontoya.ddd.MessagePublisher;
+import io.vavr.control.Try;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class SpringMessagePublisher implements MessagePublisher {
 
-  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+  private final Logger logger = LoggerFactory.getLogger(getClass());
   private final ApplicationEventPublisher publisher;
 
   @Autowired
@@ -21,11 +22,17 @@ public class SpringMessagePublisher implements MessagePublisher {
   }
 
   @Override
-  public Mono<Message> publish(Message event) {
-    logger.atInfo().log("Publishing event {}", event);
-    publisher.publishEvent(event);
-    logger.atInfo().log("Published");
-
-    return Mono.just(event);
+  public Mono<Message> publish(Message message) {
+    return Try.of(() -> {
+          logger.atInfo().log("Publishing message {}", message);
+          publisher.publishEvent(message);
+          logger.atInfo().log("Published");
+          return message;
+        })
+        .toEither()
+        .fold(
+            Mono::error,
+            Mono::just
+        );
   }
 }

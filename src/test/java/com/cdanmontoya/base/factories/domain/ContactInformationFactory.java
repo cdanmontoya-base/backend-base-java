@@ -1,7 +1,7 @@
 package com.cdanmontoya.base.factories.domain;
 
 import com.cdanmontoya.base.domain.model.ContactInformation;
-import java.util.List;
+import io.vavr.collection.List;
 import net.datafaker.Faker;
 
 public class ContactInformationFactory {
