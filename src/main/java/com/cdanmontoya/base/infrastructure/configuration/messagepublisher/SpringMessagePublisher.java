@@ -22,8 +22,8 @@ public class SpringMessagePublisher implements MessagePublisher {
   }
 
   @Override
-  public Mono<Message> publish(Message message) {
-    return Try.of(() -> {
+  public void publish(Message message) {
+    Try.of(() -> {
           logger.atInfo().log("Publishing message {}", message);
           publisher.publishEvent(message);
           logger.atInfo().log("Published");

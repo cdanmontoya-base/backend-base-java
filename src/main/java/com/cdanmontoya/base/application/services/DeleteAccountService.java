@@ -5,8 +5,8 @@ import com.cdanmontoya.base.application.ports.output.repositories.AccountReposit
 import com.cdanmontoya.base.domain.events.AccountDeleted;
 import com.cdanmontoya.base.domain.events.AccountNotDeleted;
 import com.cdanmontoya.base.domain.model.AccountId;
+import com.cdanmontoya.base.infrastructure.configuration.messagepublisher.EventPublisher;
 import com.cdanmontoya.ddd.Message;
-import com.cdanmontoya.ddd.MessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +17,19 @@ import reactor.core.publisher.Mono;
 public class DeleteAccountService {
   private final Logger logger = LoggerFactory.getLogger(getClass());
   private final AccountRepository accountRepository;
-  private final MessagePublisher messagePublisher;
 
   @Autowired
-  public DeleteAccountService(AccountRepository accountRepository,
-      MessagePublisher messagePublisher) {
+  public DeleteAccountService(AccountRepository accountRepository) {
     this.accountRepository = accountRepository;
-    this.messagePublisher = messagePublisher;
   }
 
-  // TODO: la operación de obtener los eventos y publicar es repetitiva. ¿Se puede definir en una función?
+  @EventPublisher
   public Mono<Message> delete(DeleteAccount deleteAccount) {
     logger.atInfo().log("Deleting account {}", deleteAccount);
     return this.accountRepository
         .delete(deleteAccount.id())
         .map(deletedAccount -> getSuccessfulEvent(deletedAccount.orElseThrow()))
-        .onErrorResume(throwable -> getErrorEvent(throwable.getMessage()))
-        .flatMap(messagePublisher::publish);
+        .onErrorResume(throwable -> getErrorEvent(throwable.getMessage()));
   }
 
   private Message getSuccessfulEvent(AccountId account) {

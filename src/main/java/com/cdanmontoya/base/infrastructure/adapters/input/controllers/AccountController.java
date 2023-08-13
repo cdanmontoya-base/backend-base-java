@@ -65,7 +65,8 @@ public class AccountController {
   public Mono<ResponseEntity<Message>> insert(@Valid @RequestBody InsertAccountRequestDto dto) {
     logger.atInfo().log("Executing insert request with payload {}", dto);
 
-    return insertAccountService.insert(InsertAccountRequestDtoTranslator.of(dto))
+    return insertAccountService
+        .insert(InsertAccountRequestDtoTranslator.of(dto))
         .map(AccountController::getResponseEntity);
   }
 

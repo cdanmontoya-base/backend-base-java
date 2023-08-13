@@ -33,7 +33,7 @@ class DeleteAccountServiceTest {
     accountRepository = mock(AccountRepository.class);
     messagePublisher = mock(MessagePublisher.class);
 
-    deleteAccountService = new DeleteAccountService(accountRepository, messagePublisher);
+    deleteAccountService = new DeleteAccountService(accountRepository);
   }
 
   @AfterEach
@@ -47,7 +47,7 @@ class DeleteAccountServiceTest {
     when(accountRepository.delete(any()))
         .thenAnswer(invocation -> Mono.just(Optional.of(((AccountId) invocation.getArguments()[0]))));
 
-    when(messagePublisher.publish(any())).thenAnswer(invocation -> Mono.just(invocation.getArguments()[0]));
+    // when(messagePublisher.publish(any())).thenAnswer(invocation -> Mono.just(invocation.getArguments()[0]));
 
     DeleteAccount deleteAccount = new DeleteAccount(new AccountIdFactory().get());
 
@@ -62,7 +62,7 @@ class DeleteAccountServiceTest {
     when(accountRepository.delete(any()))
         .thenReturn(Mono.just(Optional.empty()));
 
-    when(messagePublisher.publish(any())).thenAnswer(invocation -> Mono.just(invocation.getArguments()[0]));
+    // when(messagePublisher.publish(any())).thenAnswer(invocation -> Mono.just(invocation.getArguments()[0]));
 
     DeleteAccount deleteAccount = new DeleteAccount(new AccountIdFactory().get());
 

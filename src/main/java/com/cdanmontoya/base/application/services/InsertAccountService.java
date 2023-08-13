@@ -7,6 +7,7 @@ import com.cdanmontoya.base.domain.events.AccountNotInserted;
 import com.cdanmontoya.base.domain.model.Account;
 import com.cdanmontoya.base.domain.model.AccountId;
 import com.cdanmontoya.base.domain.model.ContactInformation;
+import com.cdanmontoya.base.infrastructure.configuration.messagepublisher.EventPublisher;
 import com.cdanmontoya.ddd.Message;
 import com.cdanmontoya.ddd.MessagePublisher;
 import java.util.UUID;
@@ -21,15 +22,13 @@ public class InsertAccountService {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
   private final AccountRepository accountRepository;
-  private final MessagePublisher messagePublisher;
 
   @Autowired
-  public InsertAccountService(AccountRepository accountRepository,
-      MessagePublisher messagePublisher) {
+  public InsertAccountService(AccountRepository accountRepository) {
     this.accountRepository = accountRepository;
-    this.messagePublisher = messagePublisher;
   }
 
+  @EventPublisher
   public Mono<Message> insert(InsertAccount insertAccount) {
     logger.atInfo().log("Registering account {}", insertAccount);
 
@@ -43,8 +42,7 @@ public class InsertAccountService {
 
     return accountRepository.insert(account)
         .map(insertedAccount -> getSuccessfulEvent(insertedAccount.orElseThrow()))
-        .onErrorResume(throwable -> getErrorEvent(throwable.getMessage()))
-        .flatMap(messagePublisher::publish);
+        .onErrorResume(throwable -> getErrorEvent(throwable.getMessage()));
   }
 
   private Message getSuccessfulEvent(Account account) {

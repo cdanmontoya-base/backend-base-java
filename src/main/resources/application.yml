@@ -19,3 +19,8 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     enabled: true
+
+archunit:
+  properties:
+    freeze.store.default.path: test/architecture
+    freeze.store.default.allowStoreCreation: true

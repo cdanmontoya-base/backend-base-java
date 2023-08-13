@@ -2,6 +2,7 @@ package com.cdanmontoya.base.architecture;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
+import com.cdanmontoya.common.DTO;
 import com.cdanmontoya.ddd.Event;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;

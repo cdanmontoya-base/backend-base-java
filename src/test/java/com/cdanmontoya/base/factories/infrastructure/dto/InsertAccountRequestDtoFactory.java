@@ -33,7 +33,7 @@ public class InsertAccountRequestDtoFactory {
   public InsertAccountRequestDto get() {
     return new InsertAccountRequestDto(
         email,
-        cellphones
+        cellphones.toJavaList()
     );
   }
 }

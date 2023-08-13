@@ -3,7 +3,7 @@ package com.cdanmontoya.ddd;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-public class AbstractEvent<T> implements Event {
+public abstract class AbstractEvent<T> implements Event {
 
   private final UUID id;
   private final ZonedDateTime occurredOn;
